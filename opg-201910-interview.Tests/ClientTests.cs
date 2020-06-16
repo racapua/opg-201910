@@ -85,5 +85,21 @@ namespace opg_201910_interview.Tests
 
             Assert.IsTrue(newFiles.SequenceEqual(expectedFiles));
         }
+
+        [TestMethod]
+        public void Client_ShouldUseHyphensByDefault() 
+        {
+            _client.FileOrder = new List<string>{"apple"};
+
+            // File names for testing
+            var files = new List<string>{"apple-2019-10-13.xml", "apple-20200109.xml"};
+
+            // Expected file order
+            var expectedFiles = new List<string>{"apple-2019-10-13.xml"};
+
+            var newFiles = _client.Arrange(files);
+
+            Assert.IsTrue(newFiles.SequenceEqual(expectedFiles));
+        }
     }
 }
