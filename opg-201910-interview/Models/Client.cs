@@ -8,9 +8,9 @@ namespace opg_201910_interview.Models
 {
     public class Client
     {
-        public List<string> FileOrder;
-        public string ClientID;
-        public string ClientName;
+        public List<string> FileOrder { get; set; }
+        public string ClientId { get; set; }
+        public string FileDirectoryPath { get; set; }
 
         public List<string> Arrange(List<string> files) {
             

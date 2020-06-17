@@ -69,7 +69,7 @@ namespace opg_201910_interview.Tests
         }
 
         [TestMethod]
-        public void Client_ShouldRemoveDifferentDateFormat() 
+        public void Client_ShouldUseHyphensAsPreferred() 
         {
             _client.FileOrder = new List<string>{"apple"};
 
@@ -80,6 +80,24 @@ namespace opg_201910_interview.Tests
             // Expected file order
             var expectedFiles = new List<string>{"apple-2019-10-13.xml", "apple-2020-02-20.xml", 
             "apple-2020-06-12.xml"};
+
+            var newFiles = _client.Arrange(files);
+
+            Assert.IsTrue(newFiles.SequenceEqual(expectedFiles));
+        }
+
+        [TestMethod]
+        public void Client_ShouldUseNoSpacesAsPreferred() 
+        {
+            _client.FileOrder = new List<string>{"apple"};
+
+            // File names for testing
+            var files = new List<string>{"apple-20191013.xml", "apple-2020-01-09.xml", 
+            "apple-2019-09-17.xml", "apple-20200612.xml", "apple-20200220.xml"};
+
+            // Expected file order
+            var expectedFiles = new List<string>{"apple-20191013.xml", "apple-20200220.xml", 
+            "apple-20200612.xml"};
 
             var newFiles = _client.Arrange(files);
 
